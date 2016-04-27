@@ -1,3 +1,4 @@
+
 # for commenting instead of --
 
 # Packages
@@ -10,7 +11,8 @@
     #Quandl/rdatamarket - for access to millions of data sets at respective sites
     #RGoogleAnalytics - for access to Google Analytics Data
     #RGoogleMaps - Overlays on Google Maps tiles in R
-
+	#quantreg - do I have this???
+	
   # installing and then running R packages
     install.packages("") # can list multiple - will also download dependent packages
     library("")
@@ -35,17 +37,27 @@ you can create vector using c(x, y, z) command
 	head(mydata) or head(mydata, 20) #examine your data object column headers and first 6 rows
 	tail(mydata, 20) #when importing external data source, helpful to see if import garbled
 	str(mydata) #provides data structure information (how many rows, type of data in columns, etc.)
-  
+	table(diamonds$cut) #returns how many diamonds of each factor exist in the data
+	table(diamonds$cut, diamonds$color) #returns cross-tab by cut and color
 	cor(mydata) #runs correlation matrix between all variables in a data series
-	#!!R may return NA for many calcs if even a single value is missing
+	#R may return NA for many calcs if even a single value is missing
 	  #fix this by doing mean(myvctor, na.rm=TRUE)
 	
 	choose(15,4) #how many ways can you select 4 people from a group of 15?
 	
 	#how many different pairs can you create? lists out possiblilities
 	combn(c("Bob", "Joanne", "Sally", "Tim", "Neal"),2)
+
+# R Visualizations
+	plot(mtcars$disp, mtcars$mpg)
+	plot(mtcars$disp, mtcars$mpg, xlab="Engine displacement", ylab="mpg", main="MPG compared with engine displacement")
 	
 # Package sample code
+	# Ggplot2
+	qplot(disp, mpg, data=mtcars) #generates scatterplot
+	qplot(disp, mpg, ylim=c(0,35), data=mtcars) #scatterplot with manually created y ranges
+	qplot(cty, hwy, data=mpg, geom="jitter") #scatterplot without overlap in datapoints
+	
 	# Quantmod
 	getSymbols("JPM")
 	barChart(JPM, subset='last 60 days')
@@ -57,5 +69,4 @@ you can create vector using c(x, y, z) command
 	tablename$columnname #allows you to select only a specific column in a table
 	tablename[rows,columns] #allows you to specify the row range and column range you want to select
 	mtcars[,2:4] #since nothing before comma, all records but only columns 2-4 will be selected
-  #r is case sensitive everywhere
-	
+	#r is case sensitive everywhere
